@@ -12,3 +12,12 @@ repos:
       - id: ruff
         args: [--fix]
       - id: ruff-format
+    # dbt + Snowflake: same versions as uv.lock via `uv run`; sources .env when present.
+  - repo: local
+    hooks:
+      - id: sqlfluff-lint
+        name: sqlfluff lint (dbt / Snowflake)
+        language: system
+        entry: bash scripts/sqlfluff-lint.sh
+        types: [sql]
+        pass_filenames: true
