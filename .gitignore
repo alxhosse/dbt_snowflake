@@ -1,0 +1,11 @@
+# dbt / CLI logs
+logs/
+
+# dbt build artifacts
+target/
+dbt_packages/
+dbt_internal_packages/
+
+# Local secrets and machine-local dbt metadata
+.env
+.user.yml

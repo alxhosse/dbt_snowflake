@@ -1,0 +1,13 @@
+dbt_snowflake:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: "{{ env_var('DBT_SNOWFLAKE_ACCOUNT', 'CHANGEME') }}"
+      user: "{{ env_var('DBT_SNOWFLAKE_USER', 'CHANGEME') }}"
+      password: "{{ env_var('DBT_SNOWFLAKE_PASSWORD', 'CHANGEME') }}"
+      role: "{{ env_var('DBT_SNOWFLAKE_ROLE', 'CHANGEME') }}"
+      database: "{{ env_var('DBT_SNOWFLAKE_DATABASE', 'CHANGEME') }}"
+      warehouse: "{{ env_var('DBT_SNOWFLAKE_WAREHOUSE', 'CHANGEME') }}"
+      schema: "{{ env_var('DBT_SNOWFLAKE_SCHEMA', 'CHANGEME') }}"
+      threads: 1

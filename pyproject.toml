@@ -1,0 +1,20 @@
+[project]
+name = "snowflake-dbt-project"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "dbt-core>=1.11.8",
+    "dbt-snowflake>=1.11.4",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.15.12",
+    "sqlfluff>=4.1.0",
+    "sqlfluff-templater-dbt>=4.1.0",
+]
+
+[tool.uv]
+required-version = ">=0.6.8"
