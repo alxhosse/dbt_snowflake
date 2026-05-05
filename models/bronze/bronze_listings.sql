@@ -1,4 +1,5 @@
 {{ config(materialized='incremental') }}
+
 SELECT listings.* FROM {{ source('staging', 'listings') }} AS listings
 
 {% if is_incremental() %}
