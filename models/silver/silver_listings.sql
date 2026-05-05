@@ -1,16 +1,22 @@
 {{ config(materialized='incremental', unique_key='LISTING_ID') }}
 
 SELECT
-    LISTING_ID,
-    HOST_ID,
-    PROPERTY_TYPE,
-    ROOM_TYPE,
-    CITY,
-    COUNTRY,
-    ACCOMMODATES,
-    BEDROOMS,
-    BATHROOMS,
-    PRICE_PER_NIGHT,
+    LISTINGS.LISTING_ID,
+    LISTINGS.HOST_ID,
+    LISTINGS.PROPERTY_TYPE,
+    LISTINGS.ROOM_TYPE,
+    LISTINGS.CITY,
+    LISTINGS.COUNTRY,
+    LISTINGS.ACCOMMODATES,
+    LISTINGS.BEDROOMS,
+    LISTINGS.BATHROOMS,
+    LISTINGS.PRICE_PER_NIGHT,
     {{ tag('CAST(PRICE_PER_NIGHT AS INTEGER)') }} AS PRICE_PER_NIGHT_TAG,
-    CREATED_AT
-FROM {{ ref('bronze_listings') }}
+    LISTINGS.CREATED_AT
+FROM {{ ref('bronze_listings') }} AS LISTINGS
+{% if is_incremental() %}
+    WHERE LISTINGS.CREATED_AT > (
+        SELECT COALESCE(MAX(THIS_MODEL.CREATED_AT), '1900-01-01')
+        FROM {{ this }} AS THIS_MODEL
+    )
+{% endif %}
