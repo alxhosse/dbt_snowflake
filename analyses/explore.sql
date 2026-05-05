@@ -1,1 +1,1 @@
-SELECT * FROM {{ ref('bronze_bookings') }}
+SELECT * FROM {{ ref('dim_bookings') }}
